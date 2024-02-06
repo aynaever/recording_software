@@ -1,6 +1,7 @@
 import tkinter as tk
 import vlc
 
+# vlc, media, player instances
 instance = vlc.Instance()
 player = instance.media_player_new()
 media = instance.media_new("v4l2:///dev/video0")
