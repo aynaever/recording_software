@@ -22,8 +22,8 @@ recording_options = ":sout=#transcode{vcodec=h264}\
 media.add_options(recording_options)
 
 # Start and Stop time of recording
-start_time = "17:19"
-stop_time = "17:22"
+start_time = "17:28"
+stop_time = "17:32"
 
 
 # Play video functions
@@ -74,4 +74,4 @@ while True:
     time.sleep(30)
 
 root.mainloop()
-player.stop()
+recording_player.stop()
