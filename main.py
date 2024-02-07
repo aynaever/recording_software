@@ -1,7 +1,7 @@
+from datetime import datetime
 import tkinter as tk
 import vlc
 import os
-from datetime import datetime
 import schedule
 import time
 
@@ -17,13 +17,12 @@ date = datetime.now().strftime("%H-%M_%Y-%m-%d")
 options = ":sout=#transcode{vcodec=h264}:std{access=file,mux=mp4,dst="\
         + recordings_path + "recording_" + date + ".mp4}"
 
-# time to start recording
-start_time = ""
-# time to stop recording
-stop_time = ""
-
 # Add options to media
 media.add_option(options)
+
+# Start and Stop time of recording
+start_time = "01:54"
+stop_time = "01:59"
 
 
 # Play video functions
@@ -50,6 +49,8 @@ def create_recording_dir():
         print(f"Directory '{recordings_path}' already exists.")
 
 
+create_recording_dir()
+
 root = tk.Tk()
 root.title("Recording Program")
 
@@ -71,6 +72,5 @@ while True:
     schedule.run_pending()
     time.sleep(30)
 
-create_recording_dir()
 root.mainloop()
 player.stop()
