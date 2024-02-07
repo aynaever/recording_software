@@ -2,6 +2,8 @@ import tkinter as tk
 import vlc
 import os
 from datetime import datetime
+import schedule
+import time
 
 # vlc, media, player instances
 instance = vlc.Instance()
@@ -14,6 +16,11 @@ recordings_path = "./recordings/"
 date = datetime.now().strftime("%H-%M_%Y-%m-%d")
 options = ":sout=#transcode{vcodec=h264}:std{access=file,mux=mp4,dst="\
         + recordings_path + "recording_" + date + ".mp4}"
+
+# time to start recording
+start_time = ""
+# time to stop recording
+stop_time = ""
 
 # Add options to media
 media.add_option(options)
@@ -55,6 +62,14 @@ stop_button = tk.Button(root, text="Stop", command=stop_video)
 start_button.pack()
 pause_button.pack()
 stop_button.pack()
+
+# Schedule starting record and stopping
+schedule.every().day.at(start_time).do(play_video)
+schedule.every().day.at(stop_time).do(stop_video)
+
+while True:
+    schedule.run_pending()
+    time.sleep(30)
 
 create_recording_dir()
 root.mainloop()
