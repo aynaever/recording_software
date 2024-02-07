@@ -1,6 +1,7 @@
 import tkinter as tk
 import vlc
 import os
+from datetime import datetime
 
 # vlc, media, player instances
 instance = vlc.Instance()
@@ -10,8 +11,9 @@ player.set_media(media)
 
 # Set options for recording
 recordings_path = "./recordings/"
+date = datetime.now().strftime("%H-%M_%Y-%m-%d")
 options = ":sout=#transcode{vcodec=h264}:std{access=file,mux=mp4,dst="\
-        + recordings_path + "output.mp4}"
+        + recordings_path + "recording_" + date + ".mp4}"
 
 # Add options to media
 media.add_option(options)
