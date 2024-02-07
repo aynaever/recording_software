@@ -9,7 +9,9 @@ media = instance.media_new("v4l2:///dev/video0")
 player.set_media(media)
 
 # Set options for recording
-options = ":sout=#transcode{vcodec=h264}:std{access=file,mux=mp4,dst=output.mp4}"
+recordings_path = "./recordings/"
+options = ":sout=#transcode{vcodec=h264}:std{access=file,mux=mp4,dst="\
+        + recordings_path + "output.mp4}"
 
 # Add options to media
 media.add_option(options)
@@ -32,12 +34,11 @@ def stop_video():
 
 # Create recordings directory
 def create_recording_dir():
-    dir_path = "./recordings/"
     try:
-        os.mkdir(dir_path)
-        print(f"Directory '{dir_path}' created successfully!")
+        os.mkdir(recordings_path)
+        print(f"Directory '{recordings_path}' created successfully!")
     except FileExistsError:
-        print(f"Error: Directory '{dir_path}' already exists.")
+        print(f"Directory '{recordings_path}' already exists.")
 
 
 root = tk.Tk()
@@ -53,6 +54,6 @@ start_button.pack()
 pause_button.pack()
 stop_button.pack()
 
-root.mainloop()
 create_recording_dir()
+root.mainloop()
 player.stop()
