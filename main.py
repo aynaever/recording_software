@@ -21,8 +21,8 @@ options = ":sout=#transcode{vcodec=h264}:std{access=file,mux=mp4,dst="\
 media.add_option(options)
 
 # Start and Stop time of recording
-start_time = "01:54"
-stop_time = "01:59"
+start_time = "08:00"
+stop_time = "22:00"
 
 
 # Play video functions
