@@ -7,37 +7,38 @@ import time
 
 # vlc, media, player instances
 instance = vlc.Instance()
-player = instance.media_player_new()
+recording_player = instance.media_player_new()
 media = instance.media_new("v4l2:///dev/video0")
-player.set_media(media)
+recording_player.set_media(media)
 
 # Set options for recording
 recordings_path = "./recordings/"
 date = datetime.now().strftime("%H-%M_%Y-%m-%d")
-options = ":sout=#transcode{vcodec=h264}:std{access=file,mux=mp4,dst="\
+recording_options = ":sout=#transcode{vcodec=h264}\
+        :std{access=file,mux=mp4,dst="\
         + recordings_path + "recording_" + date + ".mp4}"
 
-# Add options to media
-media.add_option(options)
+# Add recording options to media
+media.add_options(recording_options)
 
 # Start and Stop time of recording
-start_time = "08:00"
-stop_time = "22:00"
+start_time = "17:19"
+stop_time = "17:22"
 
 
 # Play video functions
 def play_video():
-    player.play()
+    recording_player.play()
 
 
 # Pause video functions
 def pause_video():
-    player.pause()
+    recording_player.pause()
 
 
 # Stop video functions
 def stop_video():
-    player.stop()
+    recording_player.stop()
 
 
 # Create recordings directory
